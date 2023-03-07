@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Alert/auth_fail_alert.dart';
-import '../Network/Bloc/Login_Bloc/login_bloc.dart';
 import '../Network/Login_api/get_set_acceess_token.dart';
 import '../Theme/text_style.dart';
 import '../constant/login_screen_constant.dart';
+import '../screen_managment_bloc/Login_Bloc/login_bloc.dart';
 
 class LoginBigScreen extends StatefulWidget {
   const LoginBigScreen({super.key});

@@ -47,3 +47,9 @@ TextStyle newsDetailTextStyle = GoogleFonts.mulish(
   fontWeight: FontWeight.w600,
   color: const Color(0xff252733),
 );
+
+TextStyle articleCreateTextStyle = GoogleFonts.mulish(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
+  color: const Color(0xff535353),
+);

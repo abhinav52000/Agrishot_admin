@@ -40,10 +40,10 @@ class ArticleModel {
     mediaslug = json['mediaslug'];
     readMoreUrl = json['readMoreUrl'];
     source = json['source'];
-    sponsored = json['sponsored'];
-    sponsoredby = json['sponsoredby'];
+    // sponsored = json['sponsored'];
+    // sponsoredby = json['sponsoredby'];
     createdAt = json['createdAt'];
-    categories = json['categories'];
+    // categories = json['categories'];
     type = json['type'];
   }
 

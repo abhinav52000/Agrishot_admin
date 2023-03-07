@@ -1,3 +1,4 @@
+import 'package:agrishot_admin/screen_managment_bloc/Home_Screen_Bloc/homescreen_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,7 +136,10 @@ class _DraftArticleState extends State<DraftArticle> {
                     ),
                   ),
                   fillColor: const Color(0xff1D8D2F),
-                  onPressed: () {},
+                  onPressed: () {
+                    currentScreenCall(
+                        context: context, screenName: 'Create Article');
+                  },
                   child: RichText(
                     text: TextSpan(
                       children: [

@@ -1,8 +1,11 @@
 import 'package:agrishot_admin/Screen/article_draft.dart';
+import 'package:agrishot_admin/screen/article_create.dart';
+import 'package:agrishot_admin/screen/overview.dart';
+import 'package:agrishot_admin/screen_managment_bloc/Home_Screen_Bloc/homescreen_bloc.dart';
+import 'package:agrishot_admin/screen_managment_bloc/Home_Screen_Bloc/homescreen_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Network/Article_Api/Article_cubit/get_article_cubit.dart';
 import '../Theme/text_style.dart';
 import '../UI_components/listtile_home.dart';
 import '../constant/home_screen_constant.dart';
@@ -19,6 +22,13 @@ class HomeScreen extends StatefulWidget {
 String tabName = 'Overview';
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeScreenCubit>(context)
+        .currentScreen(screenName: 'Overview');
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -62,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           tabName = 'Overview';
                           selectedtile = List.filled(8, false);
                           selectedtile[0] = true;
+                          currentScreenCall(
+                              context: context, screenName: 'Overview');
                         });
                       }),
                       child: CustomizedTile(
@@ -77,6 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           tabName = 'All News';
                           selectedtile = List.filled(8, false);
                           selectedtile[1] = true;
+                          currentScreenCall(
+                              context: context, screenName: 'All News');
                         });
                       }),
                       child: CustomizedTile(
@@ -137,6 +151,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           tabName = 'Articles';
                           selectedtile = List.filled(8, false);
                           selectedtile[5] = true;
+                          currentScreenCall(
+                              context: context,
+                              screenName: 'published article');
                         });
                       }),
                       child: CustomizedTile(
@@ -225,17 +242,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  Visibility(
-                    visible: selectedtile[1],
-                    child: AllNews(tabName: tabName),
-                  ),
-                  BlocProvider(
-                    create: (context) => ArticleCubit(),
-                    child: Visibility(
-                      visible: selectedtile[5],
-                      child: const DraftArticle(),
-                    ),
-                  ),
+                  BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                      builder: (context, state) {
+                    if (state is OverviewState) {
+                      return const OverviewScreen();
+                    }
+                    if (state is AllNewsState) {
+                      return AllNews(tabName: tabName);
+                    }
+                    if (state is PublishedArticleState) {
+                      return const DraftArticle();
+                    }
+                    if (state is CreateArticleState) {
+                      return const CreateArticle();
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.green),
+                    );
+                  }),
                 ],
               ),
             ),
